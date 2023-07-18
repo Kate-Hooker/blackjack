@@ -13,6 +13,9 @@ deal out hands - auto logic for computer to make its move - computer hand check 
 const randomNumber = Math.floor(Math.random() * 53)
 let shuffledDeck = []
 let freshCard = []
+let dealerSecretCard = []
+let dealersHand = []
+let playerHand = []
 
 let dealerScore = 0
 let dealerCardsTotal = 0
@@ -54,26 +57,34 @@ function buildDeck() {
   console.log(shuffledDeck)
 }
 
+function dealerGetsAFaceDownCard() {
+  dealerSecretCard = document.querySelector('#faceDown')
+  dealACard()
+  dealerSecretCard = freshCard
+  dealersHand.push(dealerSecretCard)
+  console.log(dealerSecretCard + ' is the dealers card')
+}
 //pulls a card and adds it to player ones hand, return shuffled deck without card
 //retrieve card, break into string and number, use that to pick image
 function dealACard() {
   freshCard = shuffledDeck.pop()
+}
+
+function calculateCardScore() {
   const cardParts = freshCard.split('-')
 
   valueOnCard = cardParts[0]
   suiteIdentifier = cardParts[1]
 
-  if (valueOnCard === 'K' || 'Q' || 'J') {
+  if (cardParts[0] === 'K' || cardParts[0] === 'Q' || cardParts[0] === 'J') {
     cardPoints = 10
   }
-  if (valueOnCard === 'A') {
+  if (cardParts[0] === 'A') {
     cardPoints = 11
   } else {
-    cardPoints = parseInt(valueOnCard)
+    cardPoints = parseInt(cardParts[0])
   }
 
-  console.log(valueOnCard)
-  console.log(suiteIdentifier)
   console.log('Card: ' + valueOnCard)
   console.log('Points: ' + cardPoints)
 }
@@ -84,6 +95,9 @@ function dealACard() {
 function handleStartOverButtonClick() {
   buildDeck()
   dealACard()
+  calculateCardScore()
+
+  dealersHand.push(freshCard)
 
   let dealerCards = document.querySelector('.dealerCards')
 
@@ -93,6 +107,9 @@ function handleStartOverButtonClick() {
 
   // Append the image to the dealerCards container
   dealerCards.appendChild(cardImage)
+
+  dealerGetsAFaceDownCard()
+  console.log('this should be the dealers array ' + dealersHand)
 }
 
 const startOverButton = document.getElementById('startOver')
