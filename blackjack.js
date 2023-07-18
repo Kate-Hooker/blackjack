@@ -17,6 +17,7 @@ let card
 let cardParts
 let valueOnCard
 let suiteIdentifier
+let backOfCardImage
 
 let dealerAces = 0
 let playerAces = 0
@@ -78,6 +79,8 @@ function calculateScore(nominateParticipant, hand) {
     const valueOnCard = cardParts[0]
     const suiteIdentifier = cardParts[1]
 
+    let cardPoints
+
     if (valueOnCard === 'K' || valueOnCard === 'Q' || valueOnCard === 'J') {
       cardPoints = 10
     } else if (valueOnCard === 'A') {
@@ -94,13 +97,7 @@ function calculateScore(nominateParticipant, hand) {
     score += cardPoints
   }
 
-  if (nominateParticipant === 'dealer') {
-    dealerScore += score
-  } else if (nominateParticipant === 'player') {
-    playerScore += score
-  }
-
-  console.log('Total dealer points: ' + dealerScore)
+  return score
 }
 
 function takeAnotherCard() {
@@ -121,10 +118,12 @@ function takeAnotherCard() {
 
   calculateScore('dealer', dealerHand)
   processDealerAces()
+  console.log('it would be great if this is the right score ' + dealerScore)
   console.log('this is very unlikely ' + dealerHand)
 }
 
 function processDealerAces() {
+  console.log('Totprocess aces dealer points: ' + dealerScore)
   if (dealerScore < 17) {
     takeAnotherCard()
   }
@@ -142,21 +141,37 @@ function processDealerAces() {
   }
 }
 
-//start when the table opens. One card face up displayed, on facedown displayed, if less than
-//
+//use this to update scroreboard, bets and clear dealerScore and playerScore
+function refreshDealerHand() {
+  dealerHand = [] // Empty the dealerHand array
+
+  let dealerCards = document.querySelector('.dealerCards')
+  dealerCards.innerHTML = ''
+  backOfCardImage = document.createElement('img')
+  backOfCardImage.src = `cards/BACK.png`
+
+  //Append the image to the dealerCards container
+  dealerCards.appendChild(backOfCardImage)
+}
 
 function handleStartOverButtonClick() {
+  refreshDealerHand()
   shuffledDeck = []
   freshCard = []
   dealerSecretCard = []
   playersHand = []
+  let dealerCards = []
+  dealerAces = 0
+  playerAces = 0
+  dealerScore = 0
+  playerScore = 0
 
   buildDeck()
   dealACard()
 
   dealerHand.push(freshCard)
 
-  let dealerCards = document.querySelector('.dealerCards')
+  dealerCards = document.querySelector('.dealerCards')
   cardParts = card.split('-')
   valueOnCard = cardParts[0]
   suiteIdentifier = cardParts[1]
