@@ -12,21 +12,23 @@
   </head>
 
   <body>
-    <h1> Dealer</h1>
+    <h1 id = "dealerHeading"> Dealer </h1>
     <div class= "dealerCards">
     <img class= "playingCard" id= "faceDown" src = "cards/BACK.png"></img>
     </div>
     <div class="buttoons">
-      <button id = "Hit">Hit me!</button>
-      <button id = "Hit">Hold</button>
+      <button id = "buttonToHit" class= "invisable" >Hit me!</button>
+      <button id = "buttonToHold">Hold</button>
+      <button id = "buttonFakeBlackJack" style="display:none">Fake it</button>
+    </div>  
     <div>
-      <h1> Player one</h1>
+      <h1 id = "playerHeading"> Player one</h1>
     </div>
     <div class= "playerCards">
-    <div>
+    </div>
   
     <div class="buttoons">
-      <button id = "startOver">Start Fresh</button>
+      <button id = "startOver">Deal</button>
   
     </div>
 

@@ -12,3 +12,14 @@ img {
   height: 200px;
   padding: 2%;
 }
+
+.invisible {
+  display: none;
+  color: transparent;
+  background-color: transparent;
+  border: none;
+}
+
+.visible {
+  text-align: center;
+}
