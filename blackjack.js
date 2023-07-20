@@ -209,6 +209,10 @@ function handleStartOverButtonClick() {
   const playerHeading = document.getElementById('playerHeading')
   playerHeading.textContent = 'Player'
 
+  const startOver = document.getElementById('startOver')
+  startOver.classList.remove('visible')
+  startOver.classList.add('invisible')
+
   const buttonToHit = document.getElementById('buttonToHit')
   buttonToHit.classList.remove('invisible')
   buttonToHit.classList.add('visible')
@@ -248,6 +252,10 @@ function handleHoldButtonClick() {
   const buttonToHold = document.getElementById('buttonToHold')
   buttonToHold.classList.remove('visible')
   buttonToHold.classList.add('invisible')
+
+  const startOver = document.getElementById('startOver')
+  startOver.classList.remove('invisible')
+  startOver.classList.add('visible')
 
   dealerScoreTwo = calculateScore('dealer', dealerHand)
   dealerScoreTwo = processAces(dealerScoreTwo)
